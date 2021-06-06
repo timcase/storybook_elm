@@ -1,7 +1,6 @@
 # Storybook using Elm Browser.element
 
-## Setup
-1. Example using Elm Browser.element with Storybook
+## Setup Example using Elm Browser.element with Storybook
 1. mkdir storybook_elm
 1. npm sb init (used webcomponent defaults)
 1. elm init
