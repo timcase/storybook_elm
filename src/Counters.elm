@@ -1,15 +1,13 @@
-module Story.Counters exposing (main)
+module Counters exposing (main)
 
-import Browser exposing (sandbox)
-import Html exposing (Html, button, div, text)
-import Html.Attributes exposing (class)
+import Browser
+import Html exposing (..)
+import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 
 
 
--- We've added a (Remove Int) value to our Msg union type.
--- The (Remove Int) value will be represent removing a counter at the
--- specified index.
+-- VIEW
 
 
 type Msg
@@ -54,11 +52,11 @@ view model =
         ]
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Increment index ->
-            List.indexedMap
+            ( List.indexedMap
                 (\i count ->
                     if i == index then
                         count + 1
@@ -67,9 +65,11 @@ update msg model =
                         count
                 )
                 model
+            , Cmd.none
+            )
 
         Decrement index ->
-            List.indexedMap
+            ( List.indexedMap
                 (\i count ->
                     if i == index then
                         count - 1
@@ -78,6 +78,8 @@ update msg model =
                         count
                 )
                 model
+            , Cmd.none
+            )
 
         -- We've added this clause to our case expression that handles the
         -- (Remove Int) message.
@@ -116,16 +118,36 @@ update msg model =
             -- the list of values after the removed index, we can concatenate
             -- them together and that will be the new value that we use as
             -- our model.
-            before ++ after
+            ( before ++ after, Cmd.none )
 
         AddCount ->
-            model ++ [ 0 ]
+            ( model ++ [ 0 ], Cmd.none )
 
 
-main : Program () Model Msg
+
+-- MAIN
+
+
 main =
-    sandbox
-        { init = [ 0, 0 ]
+    Browser.element
+        { init = init
         , view = view
         , update = update
+        , subscriptions = subscriptions
         }
+
+
+
+-- MODEL
+
+
+init : Int -> ( Model, Cmd Msg )
+init flags =
+    ( [ flags, flags ]
+    , Cmd.none
+    )
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none

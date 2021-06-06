@@ -1,13 +1,13 @@
-export default { title: 'Starter' }
+export default { title: 'Counters' }
 
-import StarterStory from '../src/Starter.elm';
+import CountersStory from '../src/Counters.elm';
 
 export const elm = () => {
  const container = document.createElement('div');
  const elmContainer = document.createElement('div');
  container.appendChild(elmContainer);
   console.log(elmContainer);
- const app = StarterStory.Elm.Starter.init({
+ const app = CountersStory.Elm.Counters.init({
    node: elmContainer,
    flags: 5
  })
