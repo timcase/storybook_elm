@@ -7,3 +7,5 @@
 1. Created .storybook/webpack.config.js with contents https://github.com/timcase/storybook_elm/blob/master/.storybook/webpack.config.js
 1. npm install --save-dev elm-webpack-loader
 
+## Stories
+See https://github.com/timcase/storybook_elm/blob/master/stories/Counters.stories.js for configuring a story
